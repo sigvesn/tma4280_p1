@@ -1,0 +1,8 @@
+*.pdf
+*.png
+*.pptx
+*.swp
+*.swo
+
+compile_commands.json
+**/build/*
