@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// Runs a unit test for n = 3 with the passed function, checking if the value
+// generated is pi+/= 1
 void pi_utest(double (*pi_fun)(int), char name[])
 {
     printf("Unit test: %s approximation of pi with n = 3\n", name);
@@ -9,6 +11,8 @@ void pi_utest(double (*pi_fun)(int), char name[])
     abs(diff) < 1 ? puts("Passed") : puts("Failed");
 }
 
+// Runs a verification test, writing to the file vtest.txt the computing error
+// of the function passed for n = k^2 for k=1,...,24
 void pi_vtest(double (*pi_fun)(int), char name[])
 {
     printf("Verification test: %s approximation of pi\n", name);
@@ -24,6 +28,11 @@ void pi_vtest(double (*pi_fun)(int), char name[])
     file.close();
 }
 
+// Parses cli arguments to the program using the gnu getopt function.
+// If the u or v argument is passed, a test is ran, else it returns the first
+// argument as a int to the calling function.
+// Also sets a start time, to be used in the finalize function to calculate
+// running time of the program.
 int arg_parser(int argc, char** argv, double (*pi_fun)(int), char name[], double& time_start)
 {
     if (argc < 2) {
@@ -47,6 +56,7 @@ int arg_parser(int argc, char** argv, double (*pi_fun)(int), char name[], double
     return atoi(argv[1]);
 }
 
+// Calculates run time of the program and prints results to stdout.
 void finalize(double pi, double time_start)
 {
     double error = fabs(M_PI - pi);

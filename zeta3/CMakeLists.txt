@@ -9,14 +9,14 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Add files
-include_directories(../lib0)
+include_directories(../lib)
 
 file (GLOB_RECURSE PROJECT_HEADERS src/*.hpp
                                    src/*.h
-                                   ../lib0/*.h)
+                                   ../lib/*.h)
 file (GLOB_RECURSE PROJECT_SOURCES src/*.cpp
                                    src/*.cxx
-                                   ../lib0/*.cpp)
+                                   ../lib/*.cpp)
 
 # Organizing files
 source_group ("headers" FILES ${PROJECT_HEADERS})

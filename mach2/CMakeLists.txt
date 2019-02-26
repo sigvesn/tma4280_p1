@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.9)
 
 # compiled program name
 project (main)
@@ -9,14 +9,14 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Add files
-include_directories(../lib2)
+include_directories(../lib-mpi)
 
 file (GLOB_RECURSE PROJECT_HEADERS src/*.hpp
                                    src/*.h
-                                   ../lib2/*.h)
+                                   ../lib-mpi/*.h)
 file (GLOB_RECURSE PROJECT_SOURCES src/*.cpp
                                    src/*.cxx
-                                   ../lib2/*.cpp)
+                                   ../lib-mpi/*.cpp)
 
 # Organizing files
 source_group ("headers" FILES ${PROJECT_HEADERS})

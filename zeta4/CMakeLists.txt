@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.9)
 
 # compiled program name
 project (main)
@@ -9,14 +9,14 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Add files
-include_directories(../lib)
+include_directories(../lib-mpi)
 
 file (GLOB_RECURSE PROJECT_HEADERS src/*.hpp
                                    src/*.h
-                                   ../lib/*.h)
+                                   ../lib-mpi/*.h)
 file (GLOB_RECURSE PROJECT_SOURCES src/*.cpp
                                    src/*.cxx
-                                   ../lib/*.cpp)
+                                   ../lib-mpi/*.cpp)
 
 # Organizing files
 source_group ("headers" FILES ${PROJECT_HEADERS})
@@ -25,9 +25,20 @@ source_group ("sources" FILES ${PROJECT_SOURCES})
 # set main as output executable
 add_executable (${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
+# add and link MPI
+find_package(MPI REQUIRED)
+include_directories(SYSTEM ${MPI_INCLUDE_PATH})
+target_link_libraries(${PROJECT_NAME} ${MPI_C_LIBRARIES})
+set(CMAKE_CXX_COMPILER /usr/bin/mpic++)
+
+# add and link OpenMP
+find_package(OpenMP REQUIRED)
+target_link_libraries(${PROJECT_NAME} OpenMP::OpenMP_CXX)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall ${OpenMP_CXX_FLAGS})
+
 # test run program with make run
 add_custom_target(run
-    ./${PROJECT_NAME} 100000
+    mpirun --use-hwthread-cpus -np 4  ./${PROJECT_NAME} 100000000
 )
 
 # unit tests

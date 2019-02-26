@@ -1,5 +1,6 @@
 #include <lib.h>
 
+// calculates the Riemann zeta function from 1 to n on value 2
 double zeta(int n)
 {
     double s = 0.0;
@@ -10,11 +11,14 @@ double zeta(int n)
     return s;
 }
 
+// estimates pi by approximating the zeta function from n->inf
 double zeta_pi(int n)
 {
     return sqrt(zeta(n) * 6);
 }
 
+// Serial implementation of zeta
+// relies on functions in ../lib
 int main(int argc, char** argv)
 {
 

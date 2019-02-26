@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+// Common files for the non-MPI implementations in mach/zeta-0 and 3
+
 int arg_parser(int argc, char** argv, double (*pi_fun)(int), char name[], double& time_start);
 void pi_utest(double (*f)(int), char name[]);
 void pi_vtest(double (*f)(int), char name[]);
