@@ -14,8 +14,7 @@ double mach(int rank, int nprocs, int n, double x)
 // our avaliable processors. We reduce into the sum variable 's', allowing s to
 // be private in the loop and finaly summarized before returning as a final
 // result
-#pragma omp parallel for reduction(+ \
-                                   : s)
+#pragma omp parallel for schedule(static) reduction(+ : s)
     for (int i = from; i < to; ++i)
         s += pow(-1, i - 1) * (pow(x, 2 * i - 1) / (2 * i - 1));
 

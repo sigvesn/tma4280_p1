@@ -34,7 +34,6 @@ set(CMAKE_CXX_COMPILER /usr/bin/mpic++)
 # add and link OpenMP
 find_package(OpenMP REQUIRED)
 target_link_libraries(${PROJECT_NAME} OpenMP::OpenMP_CXX)
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall ${OpenMP_CXX_FLAGS})
 
 # test run program with make run
 add_custom_target(run

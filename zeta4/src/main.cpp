@@ -14,8 +14,8 @@ double zeta(int rank, int nprocs, int n)
 // our avaliable processors. We reduce into the sum variable 's', allowing s to
 // be private in the loop and finaly summarized before returning as a final
 // result
-#pragma omp parallel for reduction(+ \
-                                   : s)
+
+#pragma omp parallel for schedule(static) reduction(+ : s)
     for (int i = from; i < to; ++i)
         s += 1 / pow(i, 2);
 
