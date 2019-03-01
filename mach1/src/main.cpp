@@ -35,6 +35,7 @@ int main(int argc, char** argv)
 
     if (rank == 0) {
         printf("Parallel Mach approx of pi with n = %d\n", n);
+        printf("running with %d processes\n", nprocs);
 
         for (int i = 0; i < workers; ++i) {
             gen_limits(from, to, i, workers, n);
