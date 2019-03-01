@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 2.8)
 
 # compiled program name
 project (main)
@@ -29,19 +29,8 @@ add_executable (${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 find_package(MPI REQUIRED)
 include_directories(SYSTEM ${MPI_INCLUDE_PATH})
 target_link_libraries(${PROJECT_NAME} ${MPI_C_LIBRARIES})
-set(CMAKE_CXX_COMPILER /usr/bin/mpic++)
 
 # test run program with make run
 add_custom_target(run
     mpirun --use-hwthread-cpus -np 4  ./${PROJECT_NAME} 10000
-)
-
-# unit tests
-add_custom_target(utest
-    ./${PROJECT_NAME} -u
-)
-
-# verification tests
-add_custom_target(vtest
-    ./${PROJECT_NAME} -v
 )

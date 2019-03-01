@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 2.8)
 
 # compiled program name
 project (main)
@@ -29,23 +29,12 @@ add_executable (${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 find_package(MPI REQUIRED)
 include_directories(SYSTEM ${MPI_INCLUDE_PATH})
 target_link_libraries(${PROJECT_NAME} ${MPI_C_LIBRARIES})
-set(CMAKE_CXX_COMPILER /usr/bin/mpic++)
 
 # add and link OpenMP
 find_package(OpenMP REQUIRED)
-target_link_libraries(${PROJECT_NAME} OpenMP::OpenMP_CXX)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${OpenMP_C_FLAGS})
 
 # test run program with make run
 add_custom_target(run
     mpirun --use-hwthread-cpus -np 4  ./${PROJECT_NAME} 100000000
-)
-
-# unit tests
-add_custom_target(utest
-    ./${PROJECT_NAME} -u
-)
-
-# verification tests
-add_custom_target(vtest
-    ./${PROJECT_NAME} -v
 )

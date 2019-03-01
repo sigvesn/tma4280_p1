@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 2.8)
 
 # compiled program name
 project (main)
@@ -27,7 +27,7 @@ add_executable (${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
 # add and link OpenMP
 find_package(OpenMP REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${OpenMP_C_FLAGS})
 
 # test run program with make run
 add_custom_target(run

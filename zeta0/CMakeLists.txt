@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 2.8)
 
 # compiled program name
-project (zeta0)
+project (main)
 
 # compileflags
 set(CMAKE_XSS_FLAGS "${CMAKE_XSS_FLAGS} - Wall -Wextra -Wpedantic -std=c++11")
@@ -27,7 +27,7 @@ add_executable (${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
 # test run program with make run
 add_custom_target(run
-    ./${PROJECT_NAME} 40
+    ./${PROJECT_NAME} 1000
 )
 
 # unit tests

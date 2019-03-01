@@ -45,7 +45,7 @@ void finalize(int rank, double pi, double time_start)
     if (rank == 0) {
         double error = fabs(M_PI - pi);
         double duration = MPI_Wtime() - time_start;
-        printf("pi=%f, error=%f, duration=%es\n", pi, error, duration);
+        printf("pi=%f, error=%e, duration=%es\n", pi, error, duration);
     }
 
     MPI_Finalize();
