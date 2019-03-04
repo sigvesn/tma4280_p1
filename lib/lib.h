@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <omp.h>
 
 // Common files for the non-MPI implementations in mach/zeta-0 and 3
 

@@ -37,6 +37,8 @@ int main(int argc, char** argv)
         return 0;
 
     printf("Serial Mach approx of pi with n = %d\n", n);
+    int nprocs = omp_get_max_threads();
+    printf("running with %d processes\n", nprocs);
 
     double pi = mach_pi(n);
 

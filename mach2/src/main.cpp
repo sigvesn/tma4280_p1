@@ -32,8 +32,11 @@ int main(int argc, char** argv)
     double time_start;
     const int n = arg_parser(argc, argv, nprocs, rank, time_start);
 
-    if (rank == 0)
+    if (rank == 0) {
         printf("Parallel Mach approx of pi with n = %d\n", n);
+        printf("running with %d processes\n", nprocs);
+    }
+        
 
     // each rank computes a part of mach
     double mach_0 = mach(rank, nprocs, n, 1 / 5.0);

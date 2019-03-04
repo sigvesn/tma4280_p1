@@ -16,6 +16,14 @@ void gen_limits(int& from, int& to, int rank, int nprocs, int n)
 
     // printf("from %d to %d\n", from, to);
 }
+
+// Returns true if n is a power of two. If a number is a power of 2 then in
+// binary representation, the count of 1 will be one.
+bool power_of_two(int n)
+{
+  return n != 0 && (n & (n - 1)) == 0;
+}
+
 // Parses cli arguments to the program
 // initiates MPI setting number of process and rank and finaly returns the
 // first argument as a int to the calling function.
@@ -27,10 +35,18 @@ int arg_parser(int argc, char** argv, int& nprocs, int& rank, double& time_start
         printf("Requires argument: number of intervals\n");
         return 0;
     }
-
+    
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+    if (! power_of_two(nprocs)) {
+        if (rank == 0)
+            printf("Number of proceses: %d, is not a power of two\n", nprocs);
+
+        MPI_Finalize();
+        return 0;
+    }
 
     if (rank == 0)
         time_start = MPI_Wtime();

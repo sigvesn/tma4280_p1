@@ -39,7 +39,8 @@ int arg_parser(int argc, char** argv, double (*pi_fun)(int), char name[], double
         printf("Requires argument: number of intervals\n");
         return 0;
     }
-    time_start = time(NULL);
+
+    time_start = omp_get_wtime();
 
     int opt;
     while ((opt = getopt(argc, argv, "vu")) != -1) {
@@ -60,6 +61,6 @@ int arg_parser(int argc, char** argv, double (*pi_fun)(int), char name[], double
 void finalize(double pi, double time_start)
 {
     double error = fabs(M_PI - pi);
-    double duration = (double)(time(NULL) - time_start);
-    printf("pi=%f, error=%f, duration=%es\n", pi, error, duration);
+    double duration = omp_get_wtime() - time_start;
+    printf("pi=%f, error=%e, duration=%es\n", pi, error, duration);
 }

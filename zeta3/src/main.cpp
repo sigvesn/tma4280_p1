@@ -31,10 +31,14 @@ int main(int argc, char** argv)
     char name[] = "Parallel OMP Zeta";
     double time_start;
     const int n = arg_parser(argc, argv, zeta_pi, name, time_start);
+
     if (n <= 0)
         return 0;
 
     printf("%s approx of pi with n = %d\n", name, n);
+
+    int nprocs = omp_get_max_threads();
+    printf("running with %d processes\n", nprocs);
 
     double pi = zeta_pi(n);
 
